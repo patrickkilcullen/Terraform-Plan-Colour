@@ -22,7 +22,7 @@ function run() {
     let out = "";
     try {
         if (!plan) {
-            throw Error("No slack bot token provided");
+            throw Error("No Plan Provided");
         }
 
         let regex = /[^\r\n]+/g;
@@ -33,7 +33,8 @@ function run() {
             while (plan_array_filter.length != 0) {
                 var shift = plan_array_filter.shift();
                 if (shift !== undefined) {
-                    out = out.concat(colourText(shift))
+                    out = out.concat(colourText(shift));
+                    out = out.concat("\n");
                 }
             }
         }
