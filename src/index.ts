@@ -2,43 +2,22 @@ import * as core from '@actions/core'
 import styles from 'ansi-styles';
 
 const plan = process.env.PLAN || ""
-const add = process.env.ADD || ""
-const remove = process.env.REMOVE || ""
-const update = process.env.UPDATE || ""
+const add = process.env.ADD || "#80FF80"
+const remove = process.env.REMOVE || "#FF404"
+const update = process.env.UPDATE || "#FFFF80"
 
 function colourText(text: string): string {
     const regexPlus = /^(\s*\+)/g
     const regexMinus = /^(\s*-)/g
     const regexTilde = /^(\s*~)/g
     if(regexPlus.test(text)) {
-        if (!add) {
-            try {
-                return styles.color.ansi16m(...styles.hexToRgb(add)) + text
-            } catch {
-                core.info("[WARN] INVALID ADD COLOUR")
-            }
-        }
-        return `\u001b[38;2;0;225;0m${text}`
+        return styles.color.ansi16m(...styles.hexToRgb(add)) + text 
     }
     if(regexMinus.test(text)) {
-        if (!remove) {
-            try {
-                return styles.color.ansi16m(...styles.hexToRgb(remove)) + text
-            } catch {
-                core.info("[WARN] INVALID REMOVE COLOUR")
-            }
-        }
-        return `\u001b[38;2;255;31;31m${text}`
+        return styles.color.ansi16m(...styles.hexToRgb(remove)) + text;
     }
     if(regexTilde.test(text)) {
-        if (!update) {
-            try {
-                return styles.color.ansi16m(...styles.hexToRgb(update)) + text
-            } catch {
-                core.info("[WARN] INVALID UPDATE COLOUR")
-            }
-        }
-        return `\u001b[38;2;255;255;0m${text}`
+       return styles.color.ansi16m(...styles.hexToRgb(update)) + text;
     }
     return text;
 }
