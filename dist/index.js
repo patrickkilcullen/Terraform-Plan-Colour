@@ -24737,36 +24737,45 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(5127));
 const ansi_styles_1 = __importDefault(__nccwpck_require__(905));
 const plan = process.env.PLAN || "";
-const add = process.env.ADD || "\/";
-const remove = process.env.REMOVE || "\/";
-const update = process.env.UPDATE || "\/";
+const add = process.env.ADD || "";
+const remove = process.env.REMOVE || "";
+const update = process.env.UPDATE || "";
 function colourText(text) {
     const regexPlus = /^(\s*\+)/g;
     const regexMinus = /^(\s*-)/g;
     const regexTilde = /^(\s*~)/g;
     if (regexPlus.test(text)) {
-        try {
-            return ansi_styles_1.default.color.ansi16m(...ansi_styles_1.default.hexToRgb(add)) + text;
+        if (!add) {
+            try {
+                return ansi_styles_1.default.color.ansi16m(...ansi_styles_1.default.hexToRgb(add)) + text;
+            }
+            catch (_a) {
+                core.info("[WARN] INVALID ADD COLOUR");
+            }
         }
-        catch (_a) {
-            return `\u001b[38;2;0;225;0m${text}`;
-        }
+        return `\u001b[38;2;0;225;0m${text}`;
     }
     if (regexMinus.test(text)) {
-        try {
-            return ansi_styles_1.default.color.ansi16m(...ansi_styles_1.default.hexToRgb(remove)) + text;
+        if (!remove) {
+            try {
+                return ansi_styles_1.default.color.ansi16m(...ansi_styles_1.default.hexToRgb(remove)) + text;
+            }
+            catch (_b) {
+                core.info("[WARN] INVALID REMOVE COLOUR");
+            }
         }
-        catch (_b) {
-            return `\u001b[38;2;255;31;31m${text}`;
-        }
+        return `\u001b[38;2;255;31;31m${text}`;
     }
     if (regexTilde.test(text)) {
-        try {
-            return ansi_styles_1.default.color.ansi16m(...ansi_styles_1.default.hexToRgb(update)) + text;
+        if (!update) {
+            try {
+                return ansi_styles_1.default.color.ansi16m(...ansi_styles_1.default.hexToRgb(update)) + text;
+            }
+            catch (_c) {
+                core.info("[WARN] INVALID UPDATE COLOUR");
+            }
         }
-        catch (_c) {
-            return `\u001b[38;2;255;255;0m${text}`;
-        }
+        return `\u001b[38;2;255;255;0m${text}`;
     }
     return text;
 }
