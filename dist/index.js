@@ -24760,7 +24760,7 @@ function run() {
             while (plan_array_filter.length != 0) {
                 var shift = plan_array_filter.shift();
                 if (shift !== undefined) {
-                    core.info(out.concat(shift));
+                    core.info(colourText(shift));
                 }
             }
         }
