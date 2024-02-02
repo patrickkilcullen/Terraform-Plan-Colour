@@ -3,7 +3,7 @@ import styles from 'ansi-styles';
 
 const plan = process.env.PLAN || ""
 const add = process.env.ADD || "#80FF80"
-const remove = process.env.REMOVE || "#FF404"
+const remove = process.env.REMOVE || "#FF4040"
 const update = process.env.UPDATE || "#FFFF80"
 
 function colourText(text: string): string {
