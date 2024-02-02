@@ -1,19 +1,35 @@
 import * as core from '@actions/core'
 
 const plan = process.env.PLAN || ""
+const add = process.env.ADD || ""
+const remove = process.env.REMOVE || ""
+const update = process.env.UPDATE || ""
 
 function colourText(text: string): string {
     const regexPlus = /^(\s*\+)/g
     const regexMinus = /^(\s*-)/g
     const regexTilde = /^(\s*~)/g
+    const style = require('ansi-styles');
     if(regexPlus.test(text)) {
-        return `\u001b[38;2;0;225;0m${text}`
+        try {
+            return style.color.ansi16m.hex(add) + text
+        } catch {
+            return `\u001b[38;2;0;225;0m${text}`
+        }
     }
     if(regexMinus.test(text)) {
-        return `\u001b[38;2;255;31;31m${text}`
+        try {
+            return style.color.ansi16m.hex(remove) + text
+        } catch {
+            return `\u001b[38;2;255;31;31m${text}`
+        }
     }
     if(regexTilde.test(text)) {
-        return `\u001b[38;2;255;255;0m${text}`
+        try {
+            return style.color.ansi16m.hex(update) + text
+        } catch {
+            return `\u001b[38;2;255;255;0m${text}`
+        }
     }
     return text;
 }

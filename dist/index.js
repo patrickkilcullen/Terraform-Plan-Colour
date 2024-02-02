@@ -24702,7 +24702,7 @@ exports["default"] = _default;
 
 /***/ }),
 
-/***/ 925:
+/***/ 4925:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -24733,18 +24733,37 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(5127));
 const plan = process.env.PLAN || "";
+const add = process.env.ADD || "";
+const remove = process.env.REMOVE || "";
+const update = process.env.UPDATE || "";
 function colourText(text) {
     const regexPlus = /^(\s*\+)/g;
     const regexMinus = /^(\s*-)/g;
     const regexTilde = /^(\s*~)/g;
+    const style = __nccwpck_require__(1471);
     if (regexPlus.test(text)) {
-        return `\u001b[38;2;0;225;0m${text}`;
+        try {
+            return style.color.ansi16m.hex(add) + text;
+        }
+        catch (_a) {
+            return `\u001b[38;2;0;225;0m${text}`;
+        }
     }
     if (regexMinus.test(text)) {
-        return `\u001b[38;2;255;31;31m${text}`;
+        try {
+            return style.color.ansi16m.hex(remove) + text;
+        }
+        catch (_b) {
+            return `\u001b[38;2;255;31;31m${text}`;
+        }
     }
     if (regexTilde.test(text)) {
-        return `\u001b[38;2;255;255;0m${text}`;
+        try {
+            return style.color.ansi16m.hex(update) + text;
+        }
+        catch (_c) {
+            return `\u001b[38;2;255;255;0m${text}`;
+        }
     }
     return text;
 }
@@ -24773,6 +24792,14 @@ function run() {
     core.info(out);
 }
 run();
+
+
+/***/ }),
+
+/***/ 1471:
+/***/ ((module) => {
+
+module.exports = eval("require")("ansi-styles");
 
 
 /***/ }),
@@ -26662,7 +26689,7 @@ module.exports = parseParams
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(925);
+/******/ 	var __webpack_exports__ = __nccwpck_require__(4925);
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()
