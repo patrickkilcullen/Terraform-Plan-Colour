@@ -42,6 +42,7 @@ function run() {
         if (error instanceof Error) core.setFailed(error.message)
     }
     console.log(out);
+    console.info(out)
 }
 
 run()
