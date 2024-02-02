@@ -24771,7 +24771,7 @@ function run() {
             core.setFailed(error.message);
     }
     console.log(out);
-    console.info(200, "OUT", out);
+    console.info("[DEBUG]", out);
 }
 run();
 
