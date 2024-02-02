@@ -1,4 +1,5 @@
 import * as core from '@actions/core'
+import styles from 'ansi-styles';
 
 const plan = process.env.PLAN || ""
 const add = process.env.ADD || ""
@@ -9,24 +10,23 @@ function colourText(text: string): string {
     const regexPlus = /^(\s*\+)/g
     const regexMinus = /^(\s*-)/g
     const regexTilde = /^(\s*~)/g
-    const style = require('ansi-styles');
     if(regexPlus.test(text)) {
         try {
-            return style.color.ansi16m.hex(add) + text
+            return styles.color.ansi16m(...styles.hexToRgb(add)) + text
         } catch {
             return `\u001b[38;2;0;225;0m${text}`
         }
     }
     if(regexMinus.test(text)) {
         try {
-            return style.color.ansi16m.hex(remove) + text
+            return styles.color.ansi16m(...styles.hexToRgb(remove)) + text
         } catch {
             return `\u001b[38;2;255;31;31m${text}`
         }
     }
     if(regexTilde.test(text)) {
         try {
-            return style.color.ansi16m.hex(update) + text
+            return styles.color.ansi16m(...styles.hexToRgb(update)) + text
         } catch {
             return `\u001b[38;2;255;255;0m${text}`
         }
