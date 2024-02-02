@@ -24737,9 +24737,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(5127));
 const ansi_styles_1 = __importDefault(__nccwpck_require__(905));
 const plan = process.env.PLAN || "";
-const add = process.env.ADD || "";
-const remove = process.env.REMOVE || "";
-const update = process.env.UPDATE || "";
+const add = process.env.ADD || "\/";
+const remove = process.env.REMOVE || "\/";
+const update = process.env.UPDATE || "\/";
 function colourText(text) {
     const regexPlus = /^(\s*\+)/g;
     const regexMinus = /^(\s*-)/g;

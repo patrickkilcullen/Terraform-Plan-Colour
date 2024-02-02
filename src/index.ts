@@ -2,9 +2,9 @@ import * as core from '@actions/core'
 import styles from 'ansi-styles';
 
 const plan = process.env.PLAN || ""
-const add = process.env.ADD || ""
-const remove = process.env.REMOVE || ""
-const update = process.env.UPDATE || ""
+const add = process.env.ADD || "\/"
+const remove = process.env.REMOVE || "\/"
+const update = process.env.UPDATE || "\/"
 
 function colourText(text: string): string {
     const regexPlus = /^(\s*\+)/g
