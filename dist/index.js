@@ -24738,13 +24738,13 @@ function colourText(text) {
     const regexMinus = /^(\s*-)/g;
     const regexTilde = /^(\s*~)/g;
     if (regexPlus.test(text)) {
-        return `\x1b[32m${text}\x1b[39m`;
+        return `\u001b[38;2;0;225;0m{text}\u001b[38;2;255;255;255m`;
     }
     if (regexMinus.test(text)) {
-        return `\x1b[31m${text}\x1b[39m`;
+        return `\u001b[38;2;255;0;0m${text}\u001b[38;2;255;255;255m`;
     }
     if (regexTilde.test(text)) {
-        return `\x1b[33m${text}\x1b[39m`;
+        return `\u001b[38;2;255;255;0m${text}\u001b[38;2;255;255;255m`;
     }
     return text;
 }
