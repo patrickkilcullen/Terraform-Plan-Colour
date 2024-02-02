@@ -1,0 +1,9 @@
+name: terraform-plan-colour
+description: take a terraform plan and outputs it with colour
+author: patrickkilcullen
+runs:
+  using: "node20"
+  main: "dist/index.js"
+branding:
+  icon: trending-up
+  color: blue
