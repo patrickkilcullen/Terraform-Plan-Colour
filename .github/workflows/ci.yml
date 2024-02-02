@@ -22,7 +22,6 @@ jobs:
       - name: Test Local Action
         id: test-action
         uses: ./
-        with:
+        env:
             PLAN: "some plan\n    + changes\n    -  other changes\n    ~ updates"
-            milliseconds: 2000
         
