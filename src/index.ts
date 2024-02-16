@@ -35,11 +35,12 @@ function run() {
         
         const regex = /[^\r\n]+/g;
         let plan_array_filter;
+        
+        console.log(process.cwd());
 
         if (path) {
             var fs = require('fs');
-            console.log(process.cwd());
-            var buffer = fs.readFileSync(path);
+            var buffer = fs.readFileSync(process.cwd() + path);
             console.log(buffer.toString());
             const file = buffer.toString();
             plan_array_filter = file.match(regex);
