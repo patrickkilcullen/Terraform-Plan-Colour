@@ -41,7 +41,7 @@ async function run() {
         console.log(process.cwd());
 
         if (path) {
-            plan_array_filter = require("fs").readFileSync("file").toString().split("\n");
+            plan_array_filter = require("fs").readFileSync(path).toString().split("\n");
         } else {
             plan_array_filter = plan.match(regex);
         }

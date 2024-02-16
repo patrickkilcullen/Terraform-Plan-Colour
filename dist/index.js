@@ -24779,7 +24779,7 @@ function run() {
             let plan_array_filter;
             console.log(process.cwd());
             if (path) {
-                plan_array_filter = (__nccwpck_require__(7147).readFileSync)("file").toString().split("\n");
+                plan_array_filter = (__nccwpck_require__(7147).readFileSync)(path).toString().split("\n");
             }
             else {
                 plan_array_filter = plan.match(regex);
