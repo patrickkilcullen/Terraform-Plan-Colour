@@ -19,6 +19,16 @@ jobs:
         id: checkout
         uses: actions/checkout@v4
 
+      - name: Create file
+        run: echo "${PLAN} > file.txt
+        shell: bash
+        env:
+          PLAN: "some plan\n    + changes\n    -  other changes\n    ~ updates"
+    
+      - name: Create file
+        run: ls
+        shell: bash
+
       - name: Test Local Action
         id: test-action
         uses: ./
