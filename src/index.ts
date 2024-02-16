@@ -2,6 +2,7 @@ import * as core from '@actions/core'
 import styles from 'ansi-styles';
 
 const plan = process.env.PLAN || ""
+const path = process.env.PATH || ""
 const add = process.env.ADD || "#80FF80"
 const remove = process.env.REMOVE || "#FF4040"
 const update = process.env.UPDATE || "#FFFF80"
@@ -25,12 +26,28 @@ function colourText(text: string): string {
 function run() {
     let out = "";
     try {
-        if (!plan) {
+        if (!plan && !plan) {
+            throw Error("No Path or Plan Provided");
+        }
+        if (path && plan) {
+            core.info("::warning ::Path and Plan passed only one expected");
             throw Error("No Plan Provided");
         }
+        
+        const regex = /[^\r\n]+/g;
+        let plan_array_filter;
 
-        let regex = /[^\r\n]+/g;
-        let plan_array_filter = plan.match(regex);
+        if (path) {
+            var fs = require('fs');
+            console.log(process.cwd());
+            var buffer = fs.readFileSync(path);
+            console.log(buffer.toString());
+            const file = buffer.toString();
+            plan_array_filter = file.match(regex);
+        } else {
+            plan_array_filter = plan.match(regex);
+        }
+
         
 
         if (plan_array_filter != null) {

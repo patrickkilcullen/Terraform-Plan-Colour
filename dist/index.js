@@ -24735,8 +24735,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(5127));
-const ansi_styles_1 = __importDefault(__nccwpck_require__(905));
+const ansi_styles_1 = __importDefault(__nccwpck_require__(2905));
 const plan = process.env.PLAN || "";
+const path = process.env.PATH || "";
 const add = process.env.ADD || "#80FF80";
 const remove = process.env.REMOVE || "#FF4040";
 const update = process.env.UPDATE || "#FFFF80";
@@ -24758,11 +24759,26 @@ function colourText(text) {
 function run() {
     let out = "";
     try {
-        if (!plan) {
+        if (!plan && !plan) {
+            throw Error("No Path or Plan Provided");
+        }
+        if (path && plan) {
+            core.info("::warning ::Path and Plan passed only one expected");
             throw Error("No Plan Provided");
         }
-        let regex = /[^\r\n]+/g;
-        let plan_array_filter = plan.match(regex);
+        const regex = /[^\r\n]+/g;
+        let plan_array_filter;
+        if (path) {
+            var fs = __nccwpck_require__(7147);
+            console.log(process.cwd());
+            var buffer = fs.readFileSync(path);
+            console.log(buffer.toString());
+            const file = buffer.toString();
+            plan_array_filter = file.match(regex);
+        }
+        else {
+            plan_array_filter = plan.match(regex);
+        }
         if (plan_array_filter != null) {
             while (plan_array_filter.length != 0) {
                 var shift = plan_array_filter.shift();
@@ -26627,7 +26643,7 @@ module.exports = parseParams
 
 /***/ }),
 
-/***/ 905:
+/***/ 2905:
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
 
 "use strict";
