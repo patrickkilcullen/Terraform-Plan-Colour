@@ -34,6 +34,7 @@ async function run() {
         if (!(path === "") && !(plan === "")) {
             core.info("::warning ::Path and Plan passed only one expected");
         }
+        console.log(plan + "\n" + path);
         
         const regex = /[^\r\n]+/g;
         let plan_array_filter;
