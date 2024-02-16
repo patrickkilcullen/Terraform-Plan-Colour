@@ -23,7 +23,7 @@ jobs:
         run: |
           { 
             echo 'file_content<<EOF'
-            cat ${{ env.PLAN }}
+            echo ${{ env.PLAN }}
             echo EOF
           } >> file.txt
         shell: bash
