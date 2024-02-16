@@ -20,7 +20,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Create file
-        run: echo $PLAN > file.txt
+        run: | { 
+          echo 'file_content<<EOF'
+          cat ${{ env.PLAN }}
+          echo EOF
+          } >> file.txt
         shell: bash
         env:
           PLAN: "some plan\n    + changes\n    -  other changes\n    ~ updates"
