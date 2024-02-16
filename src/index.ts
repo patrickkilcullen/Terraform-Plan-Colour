@@ -1,5 +1,7 @@
 import * as core from '@actions/core'
 import styles from 'ansi-styles';
+import fs from 'fs'
+import util from 'util'
 
 const plan = process.env.PLAN || ""
 const path = process.env.PATH || ""
@@ -23,7 +25,7 @@ function colourText(text: string): string {
     return text;
 }
 
-function run() {
+async function run() {
     let out = "";
     try {
         if (!plan && !plan) {
@@ -39,10 +41,8 @@ function run() {
         console.log(process.cwd());
 
         if (path) {
-            var fs = require('fs');
-            var buffer = fs.readFileSync(process.cwd() + path);
-            console.log(buffer.toString());
-            const file = buffer.toString();
+            const readFile = util.promisify(fs.readFile)
+            const file = await readFile(path, "utf8")
             plan_array_filter = file.match(regex);
         } else {
             plan_array_filter = plan.match(regex);

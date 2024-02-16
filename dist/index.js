@@ -24730,12 +24730,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(5127));
 const ansi_styles_1 = __importDefault(__nccwpck_require__(2905));
+const fs_1 = __importDefault(__nccwpck_require__(7147));
+const util_1 = __importDefault(__nccwpck_require__(3837));
 const plan = process.env.PLAN || "";
 const path = process.env.PATH || "";
 const add = process.env.ADD || "#80FF80";
@@ -24757,42 +24768,42 @@ function colourText(text) {
     return text;
 }
 function run() {
-    let out = "";
-    try {
-        if (!plan && !plan) {
-            throw Error("No Path or Plan Provided");
-        }
-        if (path && plan) {
-            core.info("::warning ::Path and Plan passed only one expected");
-        }
-        const regex = /[^\r\n]+/g;
-        let plan_array_filter;
-        console.log(process.cwd());
-        if (path) {
-            var fs = __nccwpck_require__(7147);
-            var buffer = fs.readFileSync(process.cwd() + path);
-            console.log(buffer.toString());
-            const file = buffer.toString();
-            plan_array_filter = file.match(regex);
-        }
-        else {
-            plan_array_filter = plan.match(regex);
-        }
-        if (plan_array_filter != null) {
-            while (plan_array_filter.length != 0) {
-                var shift = plan_array_filter.shift();
-                if (shift !== undefined) {
-                    out = out.concat(colourText(shift));
-                    out = out.concat("\n");
+    return __awaiter(this, void 0, void 0, function* () {
+        let out = "";
+        try {
+            if (!plan && !plan) {
+                throw Error("No Path or Plan Provided");
+            }
+            if (path && plan) {
+                core.info("::warning ::Path and Plan passed only one expected");
+            }
+            const regex = /[^\r\n]+/g;
+            let plan_array_filter;
+            console.log(process.cwd());
+            if (path) {
+                const readFile = util_1.default.promisify(fs_1.default.readFile);
+                const file = yield readFile(path, "utf8");
+                plan_array_filter = file.match(regex);
+            }
+            else {
+                plan_array_filter = plan.match(regex);
+            }
+            if (plan_array_filter != null) {
+                while (plan_array_filter.length != 0) {
+                    var shift = plan_array_filter.shift();
+                    if (shift !== undefined) {
+                        out = out.concat(colourText(shift));
+                        out = out.concat("\n");
+                    }
                 }
             }
         }
-    }
-    catch (error) {
-        if (error instanceof Error)
-            core.setFailed(error.message);
-    }
-    core.info(out);
+        catch (error) {
+            if (error instanceof Error)
+                core.setFailed(error.message);
+        }
+        core.info(out);
+    });
 }
 run();
 
