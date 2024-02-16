@@ -31,7 +31,7 @@ async function run() {
         if (!plan && !plan) {
             throw Error("No Path or Plan Provided");
         }
-        if (!(path === "") && !(plan === "")) {
+        if (path.length > 0 && plan.length > 0) {
             core.info("::warning ::Path and Plan passed only one expected");
         }
         console.log(plan + "\n" + path);
@@ -41,7 +41,7 @@ async function run() {
         
         console.log(process.cwd());
 
-        if (!(path === "")) {
+        if (path.length > 0) {
             const readFile = util.promisify(fs.readFile)
             const file = await readFile(path, "utf8")
             plan_array_filter = file.match(regex);
