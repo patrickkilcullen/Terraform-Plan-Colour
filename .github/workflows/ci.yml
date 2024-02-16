@@ -29,9 +29,15 @@ jobs:
         run: ls
         shell: bash
 
-      - name: Test Local Action
+      - name: Test Local Action with plan varable input
         id: test-action
         uses: ./
         env:
-            PLAN: "some plan\n    + changes\n    -  other changes\n    ~ updates"
-        
+          PLAN: "some plan\n    + changes\n    -  other changes\n    ~ updates"
+
+      - name: Test Local Action with plan varable input
+        id: test-action-path
+        uses: ./
+        env:
+          PATH: "test.txt"
+      
