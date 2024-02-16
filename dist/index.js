@@ -24774,10 +24774,12 @@ function run() {
             if (!plan && !plan) {
                 throw Error("No Path or Plan Provided");
             }
-            if (path.length > 0 && plan.length > 0) {
+            if ((path.length > 0) && (plan.length > 0)) {
                 core.info("::warning ::Path and Plan passed only one expected");
             }
             console.log(plan + "\n" + path);
+            console.log(path.length);
+            console.log(plan.length);
             const regex = /[^\r\n]+/g;
             let plan_array_filter;
             console.log(process.cwd());
