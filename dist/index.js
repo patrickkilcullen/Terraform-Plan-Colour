@@ -24774,13 +24774,13 @@ function run() {
             if (!plan && !plan) {
                 throw Error("No Path or Plan Provided");
             }
-            if (path && plan) {
+            if (!(path === "") && !(plan === "")) {
                 core.info("::warning ::Path and Plan passed only one expected");
             }
             const regex = /[^\r\n]+/g;
             let plan_array_filter;
             console.log(process.cwd());
-            if (path) {
+            if (!(path === "")) {
                 const readFile = util_1.default.promisify(fs_1.default.readFile);
                 const file = yield readFile(path, "utf8");
                 plan_array_filter = file.match(regex);
