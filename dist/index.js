@@ -24745,8 +24745,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(5127));
 const ansi_styles_1 = __importDefault(__nccwpck_require__(2905));
-const fs_1 = __importDefault(__nccwpck_require__(7147));
-const util_1 = __importDefault(__nccwpck_require__(3837));
 const plan = process.env.PLAN || "";
 const path = process.env.PLAN_PATH || "";
 const add = process.env.ADD || "#80FF80";
@@ -24781,9 +24779,7 @@ function run() {
             let plan_array_filter;
             console.log(process.cwd());
             if (path) {
-                const readFile = util_1.default.promisify(fs_1.default.readFile);
-                const file = yield readFile(path, "utf8");
-                plan_array_filter = file.match(regex);
+                plan_array_filter = (__nccwpck_require__(7147).readFileSync)("file").toString().split("\n");
             }
             else {
                 plan_array_filter = plan.match(regex);

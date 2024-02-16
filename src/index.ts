@@ -41,9 +41,7 @@ async function run() {
         console.log(process.cwd());
 
         if (path) {
-            const readFile = util.promisify(fs.readFile)
-            const file = await readFile(path, "utf8")
-            plan_array_filter = file.match(regex);
+            plan_array_filter = require("fs").readFileSync("file").toString().split("\n");
         } else {
             plan_array_filter = plan.match(regex);
         }
