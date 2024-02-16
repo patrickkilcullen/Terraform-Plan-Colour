@@ -35,7 +35,7 @@ jobs:
         env:
           PLAN: "some plan\n    + changes\n    -  other changes\n    ~ updates"
 
-      - name: Test Local Action with plan varable input
+      - name: Test Local Action with file
         id: test-action-path
         uses: ./
         env:

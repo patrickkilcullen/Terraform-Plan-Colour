@@ -24764,7 +24764,6 @@ function run() {
         }
         if (path && plan) {
             core.info("::warning ::Path and Plan passed only one expected");
-            throw Error("No Plan Provided");
         }
         const regex = /[^\r\n]+/g;
         let plan_array_filter;
