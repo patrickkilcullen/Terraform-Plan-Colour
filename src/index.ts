@@ -28,22 +28,19 @@ function colourText(text: string): string {
 async function run() {
     let out = "";
     try {
-        if (!plan && !plan) {
+        if (!path && !plan) {
             throw Error("No Path or Plan Provided");
         }
-        if ((path.length > 0) && ( plan.length > 0)) {
+        if (path && plan) {
             core.info("::warning ::Path and Plan passed only one expected");
         }
-        console.log(plan + "\n" + path);
-        console.log(path.length);
-        console.log(plan.length);
         
         const regex = /[^\r\n]+/g;
         let plan_array_filter;
         
         console.log(process.cwd());
 
-        if (path.length > 0) {
+        if (path) {
             const readFile = util.promisify(fs.readFile)
             const file = await readFile(path, "utf8")
             plan_array_filter = file.match(regex);
