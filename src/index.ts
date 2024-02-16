@@ -4,7 +4,7 @@ import fs from 'fs'
 import util from 'util'
 
 const plan = process.env.PLAN || ""
-const path = process.env.PATH || ""
+const path = process.env.PLAN_PATH || ""
 const add = process.env.ADD || "#80FF80"
 const remove = process.env.REMOVE || "#FF4040"
 const update = process.env.UPDATE || "#FFFF80"

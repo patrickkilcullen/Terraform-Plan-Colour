@@ -39,5 +39,5 @@ jobs:
         id: test-action-path
         uses: ./
         env:
-          PATH: "test.txt"
+          PLAN_PATH: "test.txt"
       
