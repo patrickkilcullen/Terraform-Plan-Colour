@@ -52,8 +52,7 @@ async function run() {
             while (plan_array_filter.length != 0) {
                 var shift = plan_array_filter.shift();
                 if (shift !== undefined) {
-                    out = out.concat(colourText(shift));
-                    out = out.concat("\n");
+                    core.info(colourText(shift));
                 }
             }
         }
