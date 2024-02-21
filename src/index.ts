@@ -32,7 +32,7 @@ async function run() {
             throw Error("No Path or Plan Provided");
         }
         if (path && plan) {
-            core.info("::warning ::Path and Plan passed only one expected");
+            core.warning("Path and Plan passed only one expected");
         }
         
         const regex = /[^\r\n]+/g;

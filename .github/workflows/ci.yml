@@ -34,4 +34,13 @@ jobs:
         uses: ./
         env:
           PLAN_PATH: "file.txt"
+
+      
+      - name: Test Local Action with large file
+        id: test-warning
+        uses: ./
+        env:
+          PLAN_PATH: "file.txt"
+          PLAN: "some plan\n    + changes\n    -  other changes\n    ~ updates"
+
       
